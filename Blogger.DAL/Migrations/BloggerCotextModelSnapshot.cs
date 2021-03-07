@@ -4,21 +4,19 @@ using Blogger.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Blogger.DAL.Migrations
 {
-    [DbContext(typeof(MyCotext))]
-    [Migration("20210306222432_1")]
-    partial class _1
+    [DbContext(typeof(BloggerCotext))]
+    partial class BloggerCotextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
+                .HasAnnotation("ProductVersion", "3.1.3")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.3")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Blogger.Models.BL_Category", b =>
@@ -37,14 +35,11 @@ namespace Blogger.DAL.Migrations
                     b.Property<string>("CategoryName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PostID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
                     b.HasIndex("BL_PostID");
 
-                    b.ToTable("BL_Categories");
+                    b.ToTable("Categories");
                 });
 
             modelBuilder.Entity("Blogger.Models.BL_Post", b =>
@@ -73,11 +68,6 @@ namespace Blogger.DAL.Migrations
                     b.HasOne("Blogger.Models.BL_Post", null)
                         .WithMany("Categories")
                         .HasForeignKey("BL_PostID");
-                });
-
-            modelBuilder.Entity("Blogger.Models.BL_Post", b =>
-                {
-                    b.Navigation("Categories");
                 });
 #pragma warning restore 612, 618
         }

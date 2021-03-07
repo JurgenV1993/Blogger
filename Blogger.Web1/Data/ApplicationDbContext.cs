@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Blogger.Web1.Models;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Blogger.Web1.Models;
 using Microsoft.EntityFrameworkCore;
-using Blogger.Web1.Models.ViewModels;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Blogger.Web1.Data
 {
@@ -16,5 +12,6 @@ namespace Blogger.Web1.Data
         }
         public DbSet<Blogger.Web1.Models.ViewModels.CreateModel> CreateModel { get; set; }
         public DbSet<Blogger.Web1.Models.ViewModels.LoginModel> LoginModel { get; set; }
+        public DbSet<Blogger.Web1.Models.ViewModels.CategoryModel> CategoryModel { get; set; }
     }
 }

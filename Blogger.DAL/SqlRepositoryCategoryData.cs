@@ -10,12 +10,12 @@ namespace Blogger.DAL
 {
     public class SqlRepositoryCategoryData : IRepositoryCategory
     {
-        public readonly MyCotext conn;
+        public readonly BloggerCotext conn;
         public SqlRepositoryCategoryData()
         {
-            conn = new MyCotext();
+            conn = new BloggerCotext();
         }
-        public List<Category> GetAllCategory()
+        public List<Category> GetAllCategories()
         {
             IQueryable<BL_Category> category = from c in conn.Categories
                                                select c;
@@ -32,7 +32,6 @@ namespace Blogger.DAL
             Category c = new Category();
             c.CategoryDescription = category.CategoryDescription;
             c.CategoryName = category.CategoryName;
-            c.PostID = category.PostID;
             return c;
         }
     }

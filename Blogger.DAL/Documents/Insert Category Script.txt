@@ -1,0 +1,6 @@
+﻿insert into Categories(CategoryName,CategoryDescription)
+values('FamilyCategory','FamilyCategoryDescr')
+
+
+insert into Categories(CategoryName,CategoryDescription)
+values('HealthCategory','HealthCategoryDescr')

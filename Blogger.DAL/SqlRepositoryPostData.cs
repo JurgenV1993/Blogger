@@ -11,10 +11,10 @@ namespace Blogger.DAL
 {
     public class SqlRepositoryPostData: IRepositoryPostData
     {
-        public readonly MyCotext conn; 
+        public readonly BloggerCotext conn; 
         public SqlRepositoryPostData()
         {
-            conn = new MyCotext();
+            conn = new BloggerCotext();
         }
 
         public void AddPost(Post p)
@@ -49,14 +49,11 @@ namespace Blogger.DAL
                 conn.Posts.Remove(post.FirstOrDefault());
             }
         }
-        List<Post> IRepositoryPostData.GetAllPostByUser(string id)
-        {
-            throw new NotImplementedException();
-        }
+        
         public Post ConvertEntitytoPoco(BL_Post p) 
         {
             Post post = new Post();
-            post.Categories = p.Categories;
+             //post.Categories = p.Categories;
             post.Description = p.Description;
             post.Title = p.Title;
             return post;
@@ -67,7 +64,7 @@ namespace Blogger.DAL
             BL_Post post = new BL_Post();
             post.Description = p.Description;
             post.Title = p.Title;
-            post.Categories = p.Categories;
+            //post.Categories = p.Categories;
         }
     }
 }

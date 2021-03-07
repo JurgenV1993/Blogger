@@ -1,18 +1,15 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.EntityFrameworkCore;
 using Blogger.Web1.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blogger.Web1.Models;
+using Blogger.BusinessServices.Interface;
+using Blogger.BusinessServices;
+using Microsoft.AspNetCore.Identity;
 
 namespace Blogger.Web1
 {
@@ -34,6 +31,7 @@ namespace Blogger.Web1
                     ));
 
 
+
             //Per te bere konfigurimin e Identity , me klasen e re te krijuar
             services.AddDefaultIdentity<UserApp>(options =>
             {
@@ -43,6 +41,14 @@ namespace Blogger.Web1
                 options.Password.RequiredLength = 6;
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
+
+            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+
+
+
 
             //services.AddIdentity<UserApp, IdentityRole>()
             //.AddEntityFrameworkStores<ApplicationDbContext>()
@@ -61,6 +67,9 @@ namespace Blogger.Web1
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
+            services.AddSingleton<ICategoryManager, BL_CategoryManager>();
+            //Scopped
+            //Layered Structure
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -69,7 +78,7 @@ namespace Blogger.Web1
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
+                // app.UseDatabaseErrorPage();
             }
             else
             {
