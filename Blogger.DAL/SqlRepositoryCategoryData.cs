@@ -8,7 +8,7 @@ using System.Text;
 
 namespace Blogger.DAL
 {
-    public class SqlRepositoryCategoryData : IRepositoryCategory
+    public class SqlRepositoryCategoryData : IRepositoryCategoryData
     {
         public readonly BloggerCotext conn;
         public SqlRepositoryCategoryData()

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blogger.DAL.Interface
 {
-    interface IRepositoryPostData
+    public interface IRepositoryPostData
     {
         public abstract void AddPost(Post p);
         public abstract List<Post> GetAllPostByUser(string id);

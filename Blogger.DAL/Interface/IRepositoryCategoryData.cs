@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Blogger.DAL.Interface
 {
-    interface IRepositoryCategory
+    public interface IRepositoryCategoryData
     {
         public List<Category> GetAllCategories();
     }

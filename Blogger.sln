@@ -5,15 +5,13 @@ VisualStudioVersion = 16.0.30011.22
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger.DAL", "Blogger.DAL\Blogger.DAL.csproj", "{C9A34816-768A-4314-9D76-249F8AD6E369}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger.Web", "Blogger.Web\Blogger.Web.csproj", "{9A87278E-FF07-4672-964A-696897596075}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger.Web1", "Blogger.Web1\Blogger.Web1.csproj", "{7EF92F4C-6A16-4AE0-B09B-BBD6754444D4}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger.POCO", "Blogger.POCO\Blogger.POCO.csproj", "{66D3E56C-8D1C-4E8C-95CD-B5930708AC46}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger.Models", "Blogger.Models\Blogger.Models.csproj", "{44B64463-AB93-4E04-AF45-A32CA0E345D4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blogger.BusinessServices", "Blogger.BusinessServices\Blogger.BusinessServices.csproj", "{4D6E9C04-505F-4048-B855-EE9C317C14F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blogger.BusinessServices", "Blogger.BusinessServices\Blogger.BusinessServices.csproj", "{4D6E9C04-505F-4048-B855-EE9C317C14F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,10 +23,6 @@ Global
 		{C9A34816-768A-4314-9D76-249F8AD6E369}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9A34816-768A-4314-9D76-249F8AD6E369}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9A34816-768A-4314-9D76-249F8AD6E369}.Release|Any CPU.Build.0 = Release|Any CPU
-		{9A87278E-FF07-4672-964A-696897596075}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{9A87278E-FF07-4672-964A-696897596075}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{9A87278E-FF07-4672-964A-696897596075}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{9A87278E-FF07-4672-964A-696897596075}.Release|Any CPU.Build.0 = Release|Any CPU
 		{7EF92F4C-6A16-4AE0-B09B-BBD6754444D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{7EF92F4C-6A16-4AE0-B09B-BBD6754444D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7EF92F4C-6A16-4AE0-B09B-BBD6754444D4}.Release|Any CPU.ActiveCfg = Release|Any CPU

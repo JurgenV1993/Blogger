@@ -7,9 +7,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Blogger.Web1.Models;
+using Microsoft.AspNetCore.Identity;
+using Blogger.DAL;
+using Blogger.DAL.Interface;
 using Blogger.BusinessServices.Interface;
 using Blogger.BusinessServices;
-using Microsoft.AspNetCore.Identity;
 
 namespace Blogger.Web1
 {
@@ -42,10 +44,7 @@ namespace Blogger.Web1
             })
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-
-
-
-            services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
+            //services.AddDefaultIdentity<IdentityUser>().AddRoles<IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>();
 
 
 
@@ -53,8 +52,6 @@ namespace Blogger.Web1
             //services.AddIdentity<UserApp, IdentityRole>()
             //.AddEntityFrameworkStores<ApplicationDbContext>()
             //.AddDefaultTokenProviders();
-
-
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.ConfigureApplicationCookie(options =>
@@ -67,7 +64,10 @@ namespace Blogger.Web1
                 options.AccessDeniedPath = "/Identity/Account/AccessDenied";
                 options.SlidingExpiration = true;
             });
-            services.AddSingleton<ICategoryManager, BL_CategoryManager>();
+
+            services.AddSingleton<IRepositoryCategoryData, SqlRepositoryCategoryData>();
+            services.AddSingleton<ICategory_Manager, BL_CategoryManager>();
+
             //Scopped
             //Layered Structure
         }

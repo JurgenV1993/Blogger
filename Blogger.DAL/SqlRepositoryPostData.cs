@@ -1,11 +1,8 @@
 ﻿using Blogger.DAL.Interface;
 using Blogger.Models;
 using Blogger.POCO;
-using Blogger.Web.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 namespace Blogger.DAL
 {

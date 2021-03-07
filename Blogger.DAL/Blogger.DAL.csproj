@@ -23,7 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Blogger.Models\Blogger.Models.csproj" />
     <ProjectReference Include="..\Blogger.POCO\Blogger.POCO.csproj" />
-    <ProjectReference Include="..\Blogger.Web\Blogger.Web.csproj" />
   </ItemGroup>
 
 </Project>
