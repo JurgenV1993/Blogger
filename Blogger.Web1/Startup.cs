@@ -35,7 +35,7 @@ namespace Blogger.Web1
 
 
             //Per te bere konfigurimin e Identity , me klasen e re te krijuar
-            services.AddDefaultIdentity<UserApp>(options =>
+            services.AddDefaultIdentity<IdentityUser>(options =>
             {
                 options.SignIn.RequireConfirmedAccount = false;
                 // Password settings.

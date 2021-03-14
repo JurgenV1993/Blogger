@@ -15,10 +15,10 @@ namespace Blogger.Web1.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly UserManager<UserApp> userManager;
+        private readonly UserManager<IdentityUser> userManager;
         
 
-        public HomeController(ILogger<HomeController> logger, UserManager<UserApp> userManager)
+        public HomeController(ILogger<HomeController> logger, UserManager<IdentityUser> userManager)
         {
             _logger = logger;
             

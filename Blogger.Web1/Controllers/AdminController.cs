@@ -12,9 +12,11 @@ namespace Blogger.Web1.Controllers
 {
     public class AdminController : Controller
     {
-        private readonly UserManager<UserApp> userManager;
-        private readonly SignInManager<UserApp> signInManager;
-        public AdminController(UserManager<UserApp> userManager, SignInManager<UserApp> signInManager)
+        //private readonly UserManager<UserApp> userManager;
+        //private readonly SignInManager<UserApp> signInManager;
+        private readonly UserManager<IdentityUser> userManager;
+        private readonly SignInManager<IdentityUser> signInManager;
+        public AdminController(UserManager<IdentityUser> userManager, SignInManager<IdentityUser> signInManager)
         {
             this.userManager = userManager;
             this.signInManager = signInManager;
