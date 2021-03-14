@@ -46,10 +46,18 @@ namespace Blogger.Web1.Controllers
                 {
                     model.ImageFile.CopyToAsync(fileStream);
                 }
+
+                Image image = new Image()
+                {
+                    Title = "BloggImg",
+                    ImageFile = model.ImageFile,
+                    ImageName = fileName
+                };
+                postManager.AddNewPostPhoto(image);
+
+
                 var  category=categoryManager.GetCategoryBykey(model.SelectedCategory);
                 lcategory.Add(category);
-
-
                 Post post = new Post()
                 {
                     Title = model.Title,
@@ -57,25 +65,9 @@ namespace Blogger.Web1.Controllers
                     Categories = lcategory
                 };
                 postManager.AddNewPost(post);
+
             }
             return View();
-        }
-
-        private string UploadedFile(PostViewModel model)
-        {
-            string uniqueFileName = null;
-
-            //if (model.ProfileImage != null)
-            //{
-            //    string uploadsFolder = Path.Combine(IWebHostEnvironment.WebRootPath, "images");
-            //    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
-            //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
-            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
-            //    {
-            //        model.ProfileImage.CopyTo(fileStream);
-            //    }
-            //}
-            return uniqueFileName;
         }
     }
 }

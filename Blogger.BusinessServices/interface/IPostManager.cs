@@ -10,6 +10,6 @@ namespace Blogger.BusinessServices.Interface
         public List<Post> GetAllPostByUser(string id);
         public void DeletePost(string id);
         public void AddNewPost(Post post);
-        public void AddNewPostPhoto();
+        public void AddNewPostPhoto(Image image);
     }
 }

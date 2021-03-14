@@ -50,7 +50,6 @@ namespace Blogger.DAL
         public Post ConvertEntitytoPoco(BL_Post p) 
         {
             Post post = new Post();
-             //post.Categories = p.Categories;
             post.Description = p.Description;
             post.Title = p.Title;
             return post;
@@ -64,10 +63,19 @@ namespace Blogger.DAL
             conn.Add(post);
             conn.SaveChanges();
         }
-
-        public void AddPostPhoto()
+        public void ConvertPocoToEntity(Image i)
         {
-            throw new System.NotImplementedException();
+            BL_ImageModel img = new BL_ImageModel();
+            img.Title = i.Title;
+            img.ImageName  = i.ImageName ;
+            img.ImageFile = i.ImageFile;
+            conn.Add(img);
+            conn.SaveChanges();
+        }
+
+        public void AddNewPostPhoto(Image image)
+        {
+            ConvertPocoToEntity(image);
         }
     }
 }

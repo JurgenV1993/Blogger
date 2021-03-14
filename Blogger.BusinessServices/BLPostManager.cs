@@ -19,9 +19,9 @@ namespace Blogger.BusinessServices
             repositoryPost.AddNewPost(post);
         }
 
-        public void AddNewPostPhoto()
+        public void AddNewPostPhoto(Image image)
         {
-            throw new NotImplementedException();
+            repositoryPost.AddNewPostPhoto(image);
         }
 
         public void DeletePost(string id)
