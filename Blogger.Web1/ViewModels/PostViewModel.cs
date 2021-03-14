@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Blogger.POCO;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -16,5 +17,8 @@ namespace Blogger.Web1.Models.ViewModels
         [Required]
         public string SelectedCategory { get; set; }
         public IEnumerable<SelectListItem> Categories { get; set; }
+
+        public List<Category> categories { get; set; }
+        public string PhotoId { get; set; }
     }
 }

@@ -10,6 +10,8 @@ namespace Blogger.POCO
         public string Title { get; set; }
         public string Photo { get; set; }
         public string Description { get; set; }
+        public int CategoryId { get; set; }
+        public string PhotoId { get; set; }
         public List<Category> Categories { get; set; }
     }
 }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Blogger.DAL.Migrations
 {
     [DbContext(typeof(BloggerCotext))]
-    [Migration("20210307103552_FirstMig")]
-    partial class FirstMig
+    [Migration("20210314155255_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -44,6 +44,24 @@ namespace Blogger.DAL.Migrations
                     b.ToTable("Categories");
                 });
 
+            modelBuilder.Entity("Blogger.Models.BL_ImageModel", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("ImageId");
+
+                    b.ToTable("Photos");
+                });
+
             modelBuilder.Entity("Blogger.Models.BL_Post", b =>
                 {
                     b.Property<int>("ID")
@@ -51,10 +69,16 @@ namespace Blogger.DAL.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int>("CategoryID")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Photo")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("PictureID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")

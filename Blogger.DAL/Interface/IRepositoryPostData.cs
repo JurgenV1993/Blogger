@@ -11,5 +11,6 @@ namespace Blogger.DAL.Interface
         public abstract List<Post> GetAllPostByUser(string id);
         public abstract void DeletePostById(string id);
         public abstract void AddNewPostPhoto(Image i);
+        public abstract List<Post> GetAllPost();
     }
 }

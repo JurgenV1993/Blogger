@@ -21,7 +21,6 @@ namespace Blogger.Web1.Controllers
             this._hostEnvironment = hostEnvironment;
             this.postManager = postManager;
         }
-
         [HttpGet]
         public ActionResult Index()
         {
@@ -30,7 +29,6 @@ namespace Blogger.Web1.Controllers
             viewModel.Categories = categories;
             return View(viewModel);
         }
-
         [HttpPost]
         public ActionResult Index(PostViewModel model)
         {
@@ -38,9 +36,9 @@ namespace Blogger.Web1.Controllers
             if (ModelState.IsValid)
             {
                 string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName) + DateTime.Now.ToString("yymmssfff");
                 string extension = Path.GetExtension(model.ImageFile.FileName);
-
+                fileName = fileName + extension;
                 string path = Path.Combine(wwwRootPath + "/Image/", fileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
@@ -62,12 +60,36 @@ namespace Blogger.Web1.Controllers
                 {
                     Title = model.Title,
                     Description = model.Description,
-                    Categories = lcategory
+                    CategoryId = Int16.Parse(model.SelectedCategory),
+                    Categories = lcategory,
+                    PhotoId =fileName 
                 };
                 postManager.AddNewPost(post);
-
             }
-            return View();
+           return RedirectToAction("GetAllPost");
+        }
+        public ActionResult GetAllPost()
+        {
+            var posts= postManager.GetAllPost();
+            
+            List<Category> categories = new List<Category>();
+            List<PostViewModel> postViewModel = new List<PostViewModel>();
+
+
+            foreach (var p in posts) 
+            {
+                var category = categoryManager.GetCategoryBykey(p.CategoryId.ToString());
+                categories.Add(category);
+                postViewModel.Add(new PostViewModel()
+                {
+                    Title = p.Title,
+                    Description = p.Description,
+                    SelectedCategory = p.CategoryId.ToString(),
+                    categories = categories,
+                    PhotoId =p.PhotoId 
+                });
+            }
+            return View(postViewModel);
         }
     }
 }

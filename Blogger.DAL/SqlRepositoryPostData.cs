@@ -52,6 +52,8 @@ namespace Blogger.DAL
             Post post = new Post();
             post.Description = p.Description;
             post.Title = p.Title;
+            post.CategoryId = p.CategoryID;
+            post.PhotoId = p.PictureID;
             return post;
         }
         public void ConvertPocoToEntity(Post p)
@@ -59,7 +61,8 @@ namespace Blogger.DAL
             BL_Post post = new BL_Post();
             post.Description = p.Description;
             post.Title = p.Title;
-            post.CategoryID  = 1;
+            post.CategoryID  = p.CategoryId ;
+            post.PictureID = p.PhotoId;
             conn.Add(post);
             conn.SaveChanges();
         }
@@ -76,6 +79,19 @@ namespace Blogger.DAL
         public void AddNewPostPhoto(Image image)
         {
             ConvertPocoToEntity(image);
+        }
+
+        public List<Post> GetAllPost()
+        {
+            List<Post> posts = new List<Post>();
+            IQueryable<BL_Post> post = from c in conn.Posts
+                                       select c;
+
+            foreach (var p in post)
+            {
+                posts.Add(ConvertEntitytoPoco(p));
+            }
+            return posts;
         }
     }
 }

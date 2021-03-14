@@ -8,9 +8,9 @@ namespace Blogger.Models
     {
         public int ID { get; set; }
         public string Title { get; set; }
-        public string Photo { get; set; }
         public string Description { get; set; }
         public int CategoryID { get; set; }
+        public string PictureID { get; set; }
         public List<BL_Category> Categories { get; set; }
 
     }

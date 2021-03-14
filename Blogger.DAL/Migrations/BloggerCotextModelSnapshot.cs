@@ -73,7 +73,7 @@ namespace Blogger.DAL.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Photo")
+                    b.Property<string>("PictureID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Title")

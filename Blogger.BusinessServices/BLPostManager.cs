@@ -33,5 +33,10 @@ namespace Blogger.BusinessServices
         {
             throw new NotImplementedException();
         }
+
+        public List<Post> GetAllPost()
+        {
+           return  repositoryPost.GetAllPost();
+        }
     }
 }
