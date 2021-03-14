@@ -12,9 +12,9 @@ namespace Blogger.Web1.Controllers
 {
     public class CategoryController : Controller
     {
-        public ICategory_Manager manager;
+        public ICategoryManager manager;
 
-        public CategoryController(ICategory_Manager manager)
+        public CategoryController(ICategoryManager manager)
         {
             this.manager = manager;
         }

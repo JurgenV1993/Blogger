@@ -28,4 +28,8 @@
     <ProjectReference Include="..\Blogger.BusinessServices\Blogger.BusinessServices.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Image\" />
+  </ItemGroup>
+
 </Project>

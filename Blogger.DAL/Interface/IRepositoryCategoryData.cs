@@ -7,6 +7,7 @@ namespace Blogger.DAL.Interface
 {
     public interface IRepositoryCategoryData
     {
+        public Category GetCategoryBykey(string key);
         public List<Category> GetAllCategories();
     }
 }

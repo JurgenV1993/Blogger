@@ -30,9 +30,19 @@ namespace Blogger.DAL
         public Category ConvertEntitytoPoco(BL_Category category) {
 
             Category c = new Category();
+            c.ID = category.ID;
             c.CategoryDescription = category.CategoryDescription;
             c.CategoryName = category.CategoryName;
             return c;
+        }
+
+        public Category GetCategoryBykey(string key)
+        {
+            int id = Int16.Parse(key);
+            var category = from c in conn.Categories
+                           where c.ID== id
+                           select c;
+            return ConvertEntitytoPoco(category.FirstOrDefault());
         }
     }
 }

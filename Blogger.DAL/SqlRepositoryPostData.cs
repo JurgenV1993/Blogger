@@ -14,7 +14,7 @@ namespace Blogger.DAL
             conn = new BloggerCotext();
         }
 
-        public void AddPost(Post p)
+        public void AddNewPost(Post p)
         {
             if (p != null) 
             {
@@ -57,11 +57,17 @@ namespace Blogger.DAL
         }
         public void ConvertPocoToEntity(Post p)
         {
-            SqlRepositoryCategoryData sqlRepositoryCategoryData = new SqlRepositoryCategoryData();
             BL_Post post = new BL_Post();
             post.Description = p.Description;
             post.Title = p.Title;
-            //post.Categories = p.Categories;
+            post.CategoryID  = 1;
+            conn.Add(post);
+            conn.SaveChanges();
+        }
+
+        public void AddPostPhoto()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

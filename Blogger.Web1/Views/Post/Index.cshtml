@@ -1,23 +1,66 @@
 ﻿
-@{
-    ViewData["Title"] = "Index";
+@model Blogger.Web1.Models.ViewModels.PostViewModel
+
+
+@using (Html.BeginForm(FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>POST</h4>
+        @*Titulli*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        @*@readonly = "readonly"*@
+        <div class="form-group">
+            @Html.LabelFor(x => Model.SelectedCategory, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-5">
+                @Html.DropDownListFor(x => Model.SelectedCategory, new SelectList(Model.Categories, "Value", "Text"), htmlAttributes: new { @class = "form-control" ,id = "SelectedCategory" })
+                @Html.ValidationMessageFor(x => x.SelectedCategory, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @*Photo Upload*@
+        @*<div class="form-group">
+            <label asp-for="ImageFile" class="control-label"></label>
+            <div class="custom-file">
+                <input asp-for="ImageFile" class="custom-file-input" id="customFile">
+                <label class="custom-file-label" for="customFile">Choose file</label>
+            </div>
+            <span asp-validation-for="ImageFile" class="text-danger"></span>
+        </div>*@
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ImageFile, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="custom-file">
+                @Html.EditorFor(model => model.ImageFile, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ImageFile, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+        @*Komenti*@
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextAreaFor(model => model.Description, new { htmlAttributes = new { @class = "multi-line", @readonly = "readonly" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </div>
+    </div>
 }
 
-<h1>Index</h1>
-
-
-@*<div class="col-md-4">
-    <form asp-controller="ShowProduct" asp-action="Index" method="post" role="form">
-        <div class="form-group">
-            <div class="alert-danger" asp-validation-summary="ModelOnly"></div>
-            <label asp-for="ID"></label>
-            <select asp-for="ID"
-                    class="form-control"
-                    asp-items="@(new SelectList(Categories,"Value", "Text"))">
-            </select>
-        </div>
-        <div class="form-group">
-            <input id="Submit1" class="btn btn-success" type="submit" value="submit" />
-        </div>
-    </form>
-</div>*@

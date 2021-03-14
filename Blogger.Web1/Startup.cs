@@ -66,9 +66,9 @@ namespace Blogger.Web1
             });
 
             services.AddSingleton<IRepositoryCategoryData, SqlRepositoryCategoryData>();
-            services.AddSingleton<ICategory_Manager, BL_CategoryManager>();
-
-            //Scopped
+            services.AddSingleton<ICategoryManager, BLCategoryManager>();
+            services.AddSingleton<IRepositoryPostData, SqlRepositoryPostData>();
+            services.AddSingleton<IPostManager, BLPostManager>();
             //Layered Structure
         }
 

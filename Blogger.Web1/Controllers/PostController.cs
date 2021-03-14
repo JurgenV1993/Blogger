@@ -1,101 +1,81 @@
 ﻿using Blogger.BusinessServices.Interface;
+using Blogger.POCO;
 using Blogger.Web1.Models.ViewModels;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 
 namespace Blogger.Web1.Controllers
 {
     public class PostController : Controller
     {
-        public ICategory_Manager manager;
-        public PostController(  ICategory_Manager manager)
+        public ICategoryManager categoryManager;
+        public IPostManager postManager;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        public PostController(ICategoryManager manager, IWebHostEnvironment hostEnvironment, IPostManager postManager)
         {
-        this.manager=manager;
+            this.categoryManager = manager;
+            this._hostEnvironment = hostEnvironment;
+            this.postManager = postManager;
         }
-        
+
         [HttpGet]
         public ActionResult Index()
         {
-            var categories = manager.GetAllCategories();
-            PostViewModel postViewModel = new PostViewModel();
-            postViewModel.Categories = categories;
-            return View();
+            PostViewModel viewModel = new PostViewModel();
+            var categories = categoryManager.DropDownCategories();
+            viewModel.Categories = categories;
+            return View(viewModel);
         }
 
-        // GET: Post/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: Post/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Post/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Index(PostViewModel model)
         {
-            try
+            List<Category> lcategory = new List<Category>();
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName);
+                string extension = Path.GetExtension(model.ImageFile.FileName);
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
+                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    model.ImageFile.CopyToAsync(fileStream);
+                }
+                var  category=categoryManager.GetCategoryBykey(model.SelectedCategory);
+                lcategory.Add(category);
 
-        // GET: Post/Edit/5
-        public ActionResult Edit(int id)
-        {
+
+                Post post = new Post()
+                {
+                    Title = model.Title,
+                    Description = model.Description,
+                    Categories = lcategory
+                };
+                postManager.AddNewPost(post);
+            }
             return View();
         }
 
-        // POST: Post/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        private string UploadedFile(PostViewModel model)
         {
-            try
-            {
-                // TODO: Add update logic here
+            string uniqueFileName = null;
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Post/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Post/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            //if (model.ProfileImage != null)
+            //{
+            //    string uploadsFolder = Path.Combine(IWebHostEnvironment.WebRootPath, "images");
+            //    uniqueFileName = Guid.NewGuid().ToString() + "_" + model.ProfileImage.FileName;
+            //    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+            //    using (var fileStream = new FileStream(filePath, FileMode.Create))
+            //    {
+            //        model.ProfileImage.CopyTo(fileStream);
+            //    }
+            //}
+            return uniqueFileName;
         }
     }
 }

@@ -5,10 +5,11 @@ using System.Text;
 
 namespace Blogger.BusinessServices.Interface
 {
-    interface IPost_Manager
+    public interface IPostManager
     {
         public List<Post> GetAllPostByUser(string id);
-        public void DeletePost();
-
+        public void DeletePost(string id);
+        public void AddNewPost(Post post);
+        public void AddNewPostPhoto();
     }
 }
