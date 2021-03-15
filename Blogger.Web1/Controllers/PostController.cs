@@ -35,38 +35,41 @@ namespace Blogger.Web1.Controllers
             List<Category> lcategory = new List<Category>();
             if (ModelState.IsValid)
             {
-                string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName) + DateTime.Now.ToString("yymmssfff");
-                string extension = Path.GetExtension(model.ImageFile.FileName);
-                fileName = fileName + extension;
-                string path = Path.Combine(wwwRootPath + "/Image/", fileName);
-                using (var fileStream = new FileStream(path, FileMode.Create))
+                if (model.SelectedCategory != "0") 
                 {
-                    model.ImageFile.CopyToAsync(fileStream);
+                    string wwwRootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(model.ImageFile.FileName) + DateTime.Now.ToString("yymmssfff");
+                    string extension = Path.GetExtension(model.ImageFile.FileName);
+                    fileName = fileName + extension;
+                    string path = Path.Combine(wwwRootPath + "/Image/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        model.ImageFile.CopyToAsync(fileStream);
+                    }
+
+                    Image image = new Image()
+                    {
+                        Title = "BloggImg",
+                        ImageFile = model.ImageFile,
+                        ImageName = fileName
+                    };
+                    postManager.AddNewPostPhoto(image);
+
+
+                    var category = categoryManager.GetCategoryBykey(model.SelectedCategory);
+                    lcategory.Add(category);
+                    Post post = new Post()
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        CategoryId = Int16.Parse(model.SelectedCategory),
+                        Categories = lcategory,
+                        PhotoId = fileName
+                    };
+                    postManager.AddNewPost(post);
                 }
-
-                Image image = new Image()
-                {
-                    Title = "BloggImg",
-                    ImageFile = model.ImageFile,
-                    ImageName = fileName
-                };
-                postManager.AddNewPostPhoto(image);
-
-
-                var  category=categoryManager.GetCategoryBykey(model.SelectedCategory);
-                lcategory.Add(category);
-                Post post = new Post()
-                {
-                    Title = model.Title,
-                    Description = model.Description,
-                    CategoryId = Int16.Parse(model.SelectedCategory),
-                    Categories = lcategory,
-                    PhotoId =fileName 
-                };
-                postManager.AddNewPost(post);
             }
-           return RedirectToAction("GetAllPost");
+            return RedirectToAction("GetAllPost");
         }
         public ActionResult GetAllPost()
         {
