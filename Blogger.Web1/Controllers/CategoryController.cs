@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 using Blogger.BusinessServices;
 using Blogger.BusinessServices.Interface;
 using Blogger.Web1.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogger.Web1.Controllers
 {
+    [Authorize]
     public class CategoryController : Controller
     {
         public ICategoryManager manager;

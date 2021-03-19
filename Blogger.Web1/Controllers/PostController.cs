@@ -1,6 +1,7 @@
 ﻿using Blogger.BusinessServices.Interface;
 using Blogger.POCO;
 using Blogger.Web1.Models.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +11,7 @@ using System.Linq;
 
 namespace Blogger.Web1.Controllers
 {
+    [Authorize]
     public class PostController : Controller
     {
         public ICategoryManager categoryManager;
@@ -68,8 +70,12 @@ namespace Blogger.Web1.Controllers
                     };
                     postManager.AddNewPost(post);
                 }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("GetAllPost");
+            else 
+            {
+                return RedirectToAction("GetAllPost");
+            }
         }
         public ActionResult GetAllPost()
         {
